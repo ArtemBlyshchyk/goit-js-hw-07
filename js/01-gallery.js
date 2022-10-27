@@ -32,8 +32,11 @@ function onGalleryContainerClick (event) {
 
     instance.show();
 
-    document.addEventListener('keydown', (event) => {
-        if(event.key === 'Escape') instance.close();
+    window.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape') instance.close(() => 
+            window.removeEventListener('keydown', (event) => {
+                if(event.key === 'Escape') instance.close()
+            }))
     });
 
 }
